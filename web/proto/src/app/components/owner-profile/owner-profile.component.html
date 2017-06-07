@@ -1,0 +1,59 @@
+<div class="row">
+
+    <div class="col-sm-8">
+      <div class="well">
+      <form [formGroup]="updateOwnerForm" class="reg-form" role="form" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+        <label>Manager's Name :</label>
+				<input formControlName="person_name" type="text" class="form-control"  [(ngModel)]="displOwn.person_name" id="person_name" value= "{{ displOwn.person_name}}">
+			</div>
+      <div class="form-group">
+        <label>Organisation's Name :</label>
+        <input formControlName="organisation_name" type="text" [(ngModel)]="displOwn.organisation_name" class="form-control" id="organisation_name"  value= "{{ displOwn.organisation_name}}">
+      </div>
+      <div class="form-group">
+        <label>Contact Number :</label>
+        <input formControlName="num" type="text" [(ngModel)]="displOwn.num" class="form-control" id="num" value= "{{ displOwn.num}}">
+      </div>
+      <div class="form-group">
+        <label>Email ID :</label>
+				<input formControlName="email" type="email" [(ngModel)]="displOwn.email" class="form-control" id="email" value= "{{ displOwn.email}}">
+			</div>
+
+      <div class="form-group">
+        <label>Registration Number :</label>
+				<input formControlName="registration_number" type="text" [(ngModel)]="displOwn.registration_number" class="form-control" id="registration_number" value= "{{ displOwn.registration_number}}">
+			</div>
+      <div class="form-group">
+           <label>Owner Image :</label>
+           <div style="width:100px;">
+         <img style="width:100%"   class="thumbnail" src="{{image1Url}}">
+         </div>
+      Change Image:   <input id="image_owner"  formControlName="image_owner"  name="image_owner" type="file" >
+      </div>
+      <div class="form-group">
+           <label>Organisation Image :</label>
+           <div style="width:100px;">
+         <img style="width:100%" class="thumbnail" src="{{image2Url}}">
+         </div>
+      Change Image:  <input id="image_organisation"   formControlName="image_organisation" name="image_organisation" type="file" >
+      </div>
+
+      <div class="form-group" >
+        Organisation Type :
+        <select formControlName="organisation_type" class="form-control" [(ngModel)]="displOwn.organisation_type" type="text"class="form-control" id="organisation_type"  value="{{displOwn.organisation_type}}" >
+          <option value="Salon and Spa">Salon and Spa</option>
+          <option value="Hotel">Hotel</option>
+        </select>
+      </div>
+
+			<div class="form-group">
+			    <textarea formControlName="details" class="form-control" rows="5" id="details" [(ngModel)]="displOwn.details" value= "{{displOwn.details}}"></textarea>
+			</div>
+      <div class="form-group">
+			     <button type="submit" id="submit_update_owner"class="btn btn-default">Make Changes</button>
+      </div>
+		  </form>
+      </div>
+    </div>
+</div>

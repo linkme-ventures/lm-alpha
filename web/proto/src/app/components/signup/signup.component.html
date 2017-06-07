@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-sm-8">
+      <div class="well">
+      <form [formGroup]="signForm" class="reg-form" role="form" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<input formControlName="person_name" type="text" class="form-control" id="person_name" placeholder="Enter name"required>
+			</div>
+      <div class="form-group">
+        <input formControlName="organisation_name" type="text" class="form-control" id="organisation_name" placeholder="Enter Organisation name" required>
+      </div>
+      <div class="form-group">
+        <input formControlName="num" type="text" class="form-control" id="num" placeholder="Enter contact number" required>
+      </div>
+      <div class="form-group">
+				<input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email">
+			</div>
+      <div class="form-group">
+        <input formControlName="password1" type="password" class="form-control" id="password1" placeholder="Enter password">
+      </div>
+      <div class="form-group">
+        <input formControlName="password2" type="password" class="form-control" id="password2" placeholder="Confirm password">
+      </div>
+
+
+
+      <div class="form-group">
+				<input formControlName="registration_number" type="text" class="form-control" id="registration_type" placeholder="Enter the registration Number">
+			</div>
+      <div class="form-group">
+        <input formControlName="isManager" type="hidden" value="true"class="form-control" id="isManager" placeholder="Enter the registration Number">
+      </div>
+
+      <div class="form-group">
+        Organisation Type :
+        <select   formControlName="organisation_type" class="form-control" type="text" class="form-control" id="organisation_type" required>
+          <option value="Salon and Spa">Salon and Spa</option>
+          <option value="Hotel">Hotel</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+           Owner Image :
+        <input id="image_owner" name="image_owner" type="file" >
+      </div>
+
+      <div class="form-group">
+           Organisation Image :
+        <input id="image_organisation" name="image_organisation" type="file" >
+      </div>
+			<div class="form-group">
+			    <textarea formControlName="details" class="form-control" rows="5" id="details" placeholder="Enter the details about the organisation.(Optional)"></textarea>
+			</div>
+      <div class="form-group">
+			     <button (click)="onSubmit()" type="submit" class="btn btn-default">Sign Up</button>
+      </div>
+		  </form>
+      </div>
+    </div>
+</div>
