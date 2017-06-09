@@ -6,8 +6,8 @@
 	</div>
 </div>
 
- 
-<div class="row">
+
+<div >
     <div class="col-sm-8">
       <div class="well">
         <form [formGroup]="empForm" class="reg-form" role="form" (ngSubmit)="onSubmit()">
@@ -55,5 +55,10 @@
 		  </form>
       </div>
     </div>
-    
+
+</div>
+<div class="col-sm-4" style="align:center">
+	<div class="well">
+		<button (click)="search()" type="button" class="btn btn-primary">Serach Jobs</button>
+	</div>
 </div>

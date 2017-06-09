@@ -1,0 +1,12 @@
+<h2 class="page-header">{{job.organisation_name}} </h2>
+<h3><b>Type : </b>{{job.organisation_type}}</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <img style="width:100%" class="thumbnail" src="{{imageUrl}}">
+    </div>
+    <div class="col-md-8">
+      <h4><b>Details : </b>{{job.details}}</h4>
+          <button (click)="apply()" class="btn btn-danger">Apply Here</button>
+    </div>
+
+  </div>

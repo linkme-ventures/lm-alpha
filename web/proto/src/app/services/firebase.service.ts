@@ -11,15 +11,22 @@ export class FirebaseService {
 	employees: FirebaseListObservable<any[]>;
 	owners: FirebaseObjectObservable<any[]>;
 	managedEmps: FirebaseListObservable<any[]>;
+	job: FirebaseObjectObservable<any[]>;
 	displEmp: FirebaseObjectObservable<any>;
 	displOwn: FirebaseObjectObservable<any>;
 	folder:any;
 	image1:any;
+	addit:number;
+
+	checkjobapply:any[];
+	job_apply:jobApply;
+	listings: FirebaseListObservable<any[]>;
 
 
 
   constructor(private afDb: AngularFireDatabase, public afAuth: AngularFireAuth) {
 		this.folder="OwnerImages";
+		this.checkjobapply=[];
 
   }
 
@@ -48,6 +55,7 @@ export class FirebaseService {
 
 
 	addOwner(owner){
+
 					this.afAuth.auth.createUserWithEmailAndPassword(owner.email, owner.password1).then((success) => {
 					console.log(success);
 					console.log(this.afAuth.auth.currentUser.uid);
@@ -67,7 +75,7 @@ export class FirebaseService {
 										owner.orgnaisation_image_path = path;
 										this.owners.set(owner).then((success) => {
 												this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid+'/password1').remove();
-													this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid+'/password2').remove();
+												this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid+'/password2').remove();
 												alert("Profile was created successfully");
 										});
 								});
@@ -100,6 +108,8 @@ export class FirebaseService {
  updateEmployee(employee){
     this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid).update(employee);
   }
+
+
 	updateOwner(owner){
 		 this.owners = this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid) as FirebaseObjectObservable<Owner>;
 
@@ -112,7 +122,6 @@ export class FirebaseService {
 				 iRef.put(selectedFile).then((snapshot) => {
 						 owner.orgnaisation_image = selectedFile.name;
 						 owner.orgnaisation_image_path = path;
-						// setTimeout('', 3000);
 				 });
 			 }
 		 }
@@ -129,17 +138,96 @@ export class FirebaseService {
 		 }
 
 		 			console.log(owner);
-
-					//alert("yes");
 		     this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid).update(owner);
-				 this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid).update(owner);
+				 //alert("Your profile is being updated ! Hold On!");
 				 return owner;
-				 //this.afDb.list('/Managers/').update(this.afAuth.auth.currentUser.uid, {[firebaseUser.uid]:{'path':owner.path}})
 	 }
 
+	 getJobList(){
+     this.listings = this.afDb.list('/Managers') as FirebaseListObservable<Organisation[]>;
+     return this.listings;
+   }
 
+	getCompanyDetails(id){
+		this.job = this.afDb.object('/Managers/'+id) as FirebaseObjectObservable<Organisation>
+		return this.job;
+	}
 
+	checkJob(id){
+		this.listings = this.afDb.list('/StaffingReq') as FirebaseListObservable<jobApply[]>;
+		return this.listings;
+	}
+
+	applyJob(id){
+		this.addit=1;
+		this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/").subscribe(keys => {
+		    keys.forEach(key => {
+					this.checkjobapply.push(key);
+				//console.log(this.checkjobapply.length);
+						});
+			});
+			var that=this;
+			var idto=id;
+			setTimeout(function () {
+				for(var i =0;i<that.checkjobapply.length;i++){
+						that.job = that.afDb.object("/StaffingReq/"+that.checkjobapply[i].$key);
+						that.job.subscribe(xy =>
+							{
+								var x =JSON.parse(JSON.stringify(xy));
+								if(x.toId==id){
+									that.addit=2;
+								}else{
+								}
+							});
+							if(that.addit==2){
+								break;
+							}
+						}
+    }, 500);
+	setTimeout(function () {
+		if(that.addit==1){
+			console.log(that.afAuth.auth.currentUser.uid);
+			var list = that.afDb.list(`StaffingReq`);
+			var x1= list.push({"toId":id,"fromId":that.afAuth.auth.currentUser.uid,"accepted":"false","rejected":"false","cancelled":"false"} );
+			that.afDb.object('/UserReq/'+that.afAuth.auth.currentUser.uid+'/open/'+x1.key+"/").set("true").then((success) =>{
+				}).catch((error) => {
+			alert(error.message);
+			console.log(error);
+				});
+			that.afDb.object('/UserReq/'+id+'/open/'+x1.key+"/").set("true").then((success) =>{
+				alert("You have successfully applied for this job");
+				}).catch((error) => {
+					alert(error.message);
+					console.log(error);
+					});
+				}
+				else {
+					alert("You have already applied for this job");
+					return -1;
+					}
+				}, 1000);
+	}
 }
+
+interface Organisation{
+
+	organisation_name?:string;
+	exp?:string;
+	num?:string;
+	email?:string;
+
+	registration_number?:string;
+	organisation_type?:string;
+	details?:string;
+
+	image?:any;
+	orgnaisation_image_path?:string;
+	orgnaisation_image?:any;
+	path?:string;
+}
+
+
+
 interface Owner{
 	$key?:string;
 	person_name?:string;
@@ -160,8 +248,8 @@ interface Owner{
 }
 
 interface Employee{
-  	$key?:string;
-  	name?: string;
+  $key?:string;
+  name?: string;
 	pos?: string;
 	exp?: string;
 	num?: string;
@@ -178,4 +266,12 @@ interface Employee{
 interface ManagedEmp{
   	$key?:string;
   	name?:string;
+}
+interface jobApply{
+	 fromId?: any;
+	 toId?: any;
+	 accepted?: string;
+	 cancelled?: string;
+	 rejected?: string;
+
 }

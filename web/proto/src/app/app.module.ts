@@ -21,7 +21,9 @@ import { AuthService } from './components/core/auth.service';
 import { AuthGuard} from './components/core/auth.guard';
 import { SignupComponent } from './components/signup/signup.component';
 import { OwnerProfileComponent } from './components/owner-profile/owner-profile.component';
-
+import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
+import { EmpJobComponent } from './components/emp-job/emp-job.component';
+import { JobPageComponent } from './components/job-page/job-page.component';
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -30,7 +32,10 @@ export const appRoutes: Routes = [
   {path:'home', component:HomeComponent, canActivate: [AuthGuard]},
   {path:'emp-home', component:EmpHomeComponent, canActivate: [AuthGuard]},
   {path:'signup', component:SignupComponent},
-  {path:'owner-profile', component:OwnerProfileComponent}
+  {path:'owner-profile', component:OwnerProfileComponent},
+  {path:'job-search', component:EmpJobComponent},
+  {path:'job-search/:id', component:JobPageComponent},
+
 ]
 
 @NgModule({
@@ -42,7 +47,10 @@ export const appRoutes: Routes = [
     LoginComponent,
     EmpHomeComponent,
     SignupComponent,
-    OwnerProfileComponent
+    OwnerProfileComponent,
+    ImageCropperComponent,
+    EmpJobComponent,
+    JobPageComponent
   ],
   imports: [
     BrowserModule,

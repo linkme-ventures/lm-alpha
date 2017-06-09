@@ -21,7 +21,10 @@
         <input formControlName="password2" type="password" class="form-control" id="password2" placeholder="Confirm password">
       </div>
 
-
+      <!--<div>
+              <img-cropper id="image_owner" name="image_owner" [image]="data" [settings]="cropperSettings"></img-cropper><br>
+              <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+          </div>-->
 
       <div class="form-group">
 				<input formControlName="registration_number" type="text" class="form-control" id="registration_type" placeholder="Enter the registration Number">
@@ -38,10 +41,11 @@
         </select>
       </div>
 
-      <div class="form-group">
+    <div class="form-group">
            Owner Image :
-        <input id="image_owner" name="image_owner" type="file" >
+        <input id="image_owner" name="image_owner" resize-quality="0.5" type="file" >
       </div>
+
 
       <div class="form-group">
            Organisation Image :
@@ -50,8 +54,20 @@
 			<div class="form-group">
 			    <textarea formControlName="details" class="form-control" rows="5" id="details" placeholder="Enter the details about the organisation.(Optional)"></textarea>
 			</div>
+
+      <!--<div class="file-upload">
+          <span class="text">upload</span>
+          <input id="custom-input" type="file" (change)="fileChangeListener($event)">
+      </div>
+      <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+      <br>
+      <span class="result rounded" *ngIf="data.image" >
+          <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+      </span>-->
+
+
       <div class="form-group">
-			     <button (click)="onSubmit()" type="submit" class="btn btn-default">Sign Up</button>
+			     <button type="submit" class="btn btn-default">Sign Up</button>
       </div>
 		  </form>
       </div>

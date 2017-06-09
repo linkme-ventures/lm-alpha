@@ -28,8 +28,8 @@ export class EmpHomeComponent implements OnInit {
 	});
 
 	showEmp: any;
-	
-  constructor(private firebaseService: FirebaseService, public afAuth: AngularFireAuth, private router: Router) { 
+
+  constructor(private firebaseService: FirebaseService, public afAuth: AngularFireAuth, private router: Router) {
 
   }
 
@@ -43,6 +43,9 @@ export class EmpHomeComponent implements OnInit {
   onSubmit() {
   		console.log(this.empForm.value);
   		this.firebaseService.updateEmployee(this.empForm.value);
+  }
+  search(){
+    this.router.navigate(['/job-search']);
   }
 
 }

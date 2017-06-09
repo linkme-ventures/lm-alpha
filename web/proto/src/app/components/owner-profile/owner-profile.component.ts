@@ -80,6 +80,7 @@ export class OwnerProfileComponent implements OnInit {
          document.getElementById("submit_update_owner").innerHTML="Are you Sure to  Make the Changes? ";
 
          this.firebaseService.updateOwner(this.updateOwnerForm.value);
+         alert("Your profile is being updated ! Hold On!");
 
         //  document.getElementById("submit_update_owner").value = "Remove from Favorite";
 
