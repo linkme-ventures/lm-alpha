@@ -1,28 +1,31 @@
-<div class="row">
-	<div class="col-lg-12">
-	    <h1 class="page-header">
-	        Login
-	    </h1>
-	</div>
-</div>
-<div class="row">
-    <div class="col-sm-8">
-      <div class="well">
-        <form [formGroup]="loginForm" class="reg-form" role="form" (ngSubmit)="login()">
-			<div class="form-group">
-				<input formControlName="em" type="email" class="form-control" id="email" placeholder="Enter email">
-			</div>
-			<div class="form-group">
-				<input formControlName="pass" type="password" class="form-control" id="password" placeholder="Enter password">
-			</div>
-			<button type="submit" class="btn btn-default">Login</button>
-		  </form>
-      </div>
-    </div>
 
-		<div class="col-sm-4" style="align:center">
-			<div class="well">
-		  	<button (click)="signup()" type="button" class="btn btn-primary">SignUp</button>
-			</div>
+<div class="row vertical-align">
+  <div class="col-xs-12 rs-width">
+	<div class="bs-component">
+	  <div class="panel panel-primary">
+		<div class="panel-heading">
+		  <h3 class="panel-title lm-title">LinkMe</h3>
 		</div>
+		<div class="panel-body">
+		  <form [formGroup]="loginForm" class="reg-form" role="form" (ngSubmit)="login()">
+	<div class="form-group">
+		<input formControlName="em" type="email" class="form-control" id="email" placeholder="Enter email">
+	</div>
+	<div class="form-group">
+		<input formControlName="pass" type="password" class="form-control" id="password" placeholder="Enter password">
+	</div>
+	<div class="row">
+	  	<div class="col-xs-6 text-center">
+			<button type="submit" class="btn btn-default">Login</button>
+		</div>
+		<div class="col-xs-6 text-center">	
+			<button (click)="signup()" type="button" class="btn btn-default text-center">SignUp</button>
+		</div>
+	</div>	
+  </form>
+		</div>
+	  </div>
+
+	<div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
+  </div>
 </div>
