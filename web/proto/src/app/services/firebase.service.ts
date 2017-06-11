@@ -160,7 +160,7 @@ export class FirebaseService {
 
 	applyJob(id){
 		this.addit=1;
-		this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/").subscribe(keys => {
+		this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/").take(1).subscribe(keys => {
 		    keys.forEach(key => {
 					this.checkjobapply.push(key);
 				//console.log(this.checkjobapply.length);
@@ -170,8 +170,8 @@ export class FirebaseService {
 			var idto=id;
 			setTimeout(function () {
 				for(var i =0;i<that.checkjobapply.length;i++){
-						that.job = that.afDb.object("/StaffingReq/"+that.checkjobapply[i].$key);
-						that.job.subscribe(xy =>
+						that.job = that.afDb.object("/StaffingReq/"+that.checkjobapply[i].$key+"/reqInfo");
+						that.job.take(1).subscribe(xy =>
 							{
 								var x =JSON.parse(JSON.stringify(xy));
 								if(x.toId==id){
@@ -183,29 +183,36 @@ export class FirebaseService {
 								break;
 							}
 						}
-    }, 500);
-	setTimeout(function () {
-		if(that.addit==1){
-			console.log(that.afAuth.auth.currentUser.uid);
-			var list = that.afDb.list(`StaffingReq`);
-			var x1= list.push({"toId":id,"fromId":that.afAuth.auth.currentUser.uid,"accepted":"false","rejected":"false","cancelled":"false"} );
-			that.afDb.object('/UserReq/'+that.afAuth.auth.currentUser.uid+'/open/'+x1.key+"/").set("true").then((success) =>{
-				}).catch((error) => {
-			alert(error.message);
-			console.log(error);
-				});
-			that.afDb.object('/UserReq/'+id+'/open/'+x1.key+"/").set("true").then((success) =>{
-				alert("You have successfully applied for this job");
-				}).catch((error) => {
-					alert(error.message);
-					console.log(error);
-					});
-				}
+    		}, 500);
+
+			setTimeout(function () {
+				if(that.addit==1){
+					console.log(that.afAuth.auth.currentUser.uid);
+					console.log(JSON.stringify({"toId":id,"fromId":that.afAuth.auth.currentUser.uid,"cancelled":"false"}));
+					let updateMap = {};
+					var postData = {"toId":id,"fromId":that.afAuth.auth.currentUser.uid,"cancelled":"false"};
+					var newReqId = firebase.database().ref().child('StaffingReq').push().key;
+					
+					updateMap["/StaffingReq/"+ newReqId + "/reqInfo/"] = postData;
+					updateMap["/UserReq/"+that.afAuth.auth.currentUser.uid+"/open/"+newReqId+"/"] = "true";
+  					
+  					firebase.database().ref().update(updateMap).then((success) =>{
+  						that.afDb.object('/UserReq/'+id+'/open/'+newReqId+"/").set("true").then((success) =>{
+						alert("You have successfully applied for this job");
+							}).catch((error) => {
+								alert("Job applied but request not sent: "+ error.message);
+								console.log(error);
+								});
+						}).catch((error) => {
+							alert(error.message);
+							console.log(error);
+						});
+					}
 				else {
 					alert("You have already applied for this job");
 					return -1;
 					}
-				}, 1000);
+			}, 1000);
 	}
 }
 
@@ -268,10 +275,13 @@ interface ManagedEmp{
   	name?:string;
 }
 interface jobApply{
-	 fromId?: any;
-	 toId?: any;
-	 accepted?: string;
-	 cancelled?: string;
-	 rejected?: string;
-
+	reqInfo: {
+		fromId?: any;
+		toId?: any;
+	 	cancelled?: string;
+	}, 	
+	result: { 
+	 	accepted?: string;
+	    rejected?: string;
+	}    
 }
