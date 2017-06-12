@@ -19,10 +19,13 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-    
+          "../ct_mkit/css/bootstrap.min.css",
+          "../ct_mkit/css/material-kit.css"
       ],
       "scripts": [
-          
+          "../node_modules/jquery/dist/jquery.js",
+          "../ct_mkit/js/bootstrap.min.js",
+          "../ct_mkit/js/material.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
