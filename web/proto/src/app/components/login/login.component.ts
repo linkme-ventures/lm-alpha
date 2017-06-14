@@ -62,6 +62,9 @@ export class LoginComponent  {
     this.router.navigate(['/signup']);
 
   }
+  emp_signup(){
+    this.router.navigate(['/employee-signup']);
+  }
 
   ngOnInit() {
 

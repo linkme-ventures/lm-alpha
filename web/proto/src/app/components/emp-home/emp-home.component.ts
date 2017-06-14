@@ -45,7 +45,30 @@ export class EmpHomeComponent implements OnInit {
   		this.firebaseService.updateEmployee(this.empForm.value);
   }
   search(){
-    this.router.navigate(['/job-search']);
+  //  this.router.navigate(['/job-search']);
+  }
+  search_companies(){
+  //  this.router.navigate(['/job-search']);
+  }
+  search_jobs(){
+    var x=this.firebaseService.check_if_free_employee();
+    //this.router.navigate(['/job-search']);
+    x.subscribe(keys => {
+				keys.forEach(key => {
+					if(key.$key=='name'){
+						//var x=1;
+            alert("U ARE A FREE EMPLOYEE");
+            this.router.navigate(['/jobs-vacant']);
+
+					}
+					//this.checkjobadd.push(key);
+				//console.log(this.checkjobadd.length);
+						});
+            if(keys==""){
+            alert("Sorry ! You are a working Employee! You Cannot search for Jobs unless you quit the present job. ");
+            }
+			});
+    //alert(x);
   }
 
 }

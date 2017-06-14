@@ -1,6 +1,10 @@
+<br><br>
+<br><br>
+<br><br>
+
 <b>Search For : </b>
-<button (click)="salonSearch()" class="btn btn-primary">Salon and Spa</button>
-<button (click)="hotelSearch()" class="btn btn-primary">Hotels</button>
+<button (click)="salonSearch()"  type="button" class="btn btn-primary">Salon and Spa</button>
+<button (click)="hotelSearch()"  type="button" class="btn btn-primary">Hotels</button>
 <br>
 <ul class="list-group">
   <div *ngFor="let listing of listings">
@@ -9,5 +13,5 @@
           <a [routerLink]="['/job-search/'+listing.$key]"><h3>{{listing.organisation_name}}</h3></a><h6><b>{{listing.organisation_type}}</b></h6>{{listing.details}}
       </li>
     </div>
-</div>
+  </div>
 </ul>

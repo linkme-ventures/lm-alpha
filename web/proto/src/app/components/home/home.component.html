@@ -1,18 +1,21 @@
 <div class="">
 	<div class="col-lg-8">
-	    <h1 class="page-header">
-	        Register New Employee
-	    </h1>
+	    <h3 class="page-header">
+	        Register New Employee {{manInfo.organisation_name}}
+	    </h3>
 	</div>
 </div>
 <div class="">
-	<div class="col-lg-4">
+	<div class="col-lg-3">
 
 
-				 <h1 class="page-header">
-	 	       <button (click)="edit()" type="button" class="btn btn-primary">Edit Owner Profile</button>
-	 	    </h1>
+				 <h3 class="page-header">
+	 	       <button (click)="edit()" type="button" class="btn btn-primary">See Job Applicants</button>
+					 <button (click)="add_vacancies()" type="button" class="btn btn-primary">Add Job Vacancies</button>
+					 <button (click)="edit()" type="button" class="btn btn-primary">Edit Owner Profile</button>
+	 	    </h3>
 	</div>
+
 </div>
  <!-- Modal -->
 	  <div class="modal fade" id="myModal" role="dialog">

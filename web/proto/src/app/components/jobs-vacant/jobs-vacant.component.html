@@ -1,0 +1,24 @@
+<br><br>
+<br><br>
+<br><br>
+
+<b><h3 style="color:white;">Search For : </h3></b>
+<button (click)="salonSearch()"  type="button" class="btn btn-primary">Salon and Spa</button>
+<button (click)="hotelSearch()"  type="button" class="btn btn-primary">Hotels</button>
+<br>
+<ul class="list-group">
+  <div *ngFor="let listing of x; let i = index" [attr.data-index]="i">
+    <div *ngIf="listing.vacInfo.job_category==job">
+      <li class="list-group-item" >
+          <a ><h3>Job : {{listing.vacInfo.job_role}}</h3></a><h6><b>Salary : Rs.{{listing.vacInfo.job_salary}} per month/-</b></h6>
+        <h4 *ngIf="listing.vacInfo.job_gender==1"> Gender : Male </h4>
+        <h4 *ngIf="listing.vacInfo.job_gender==2"> Gender : Female </h4>
+        <h4 *ngIf="listing.vacInfo.job_address==1">Location : RAMMURTHY NAGAR</h4>
+        <h4 *ngIf="listing.vacInfo.job_address==2">Location : KASTHURI NAGAR</h4>
+          <button (click)="apply(i)" class="btn btn-danger">Apply Here</button>
+      </li>
+<br><br>
+    </div>
+
+  </div>
+</ul>

@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
 	managedEmps: any;
 	showEmp: any;
-
+  manInfo: any;
   constructor(private firebaseService: FirebaseService, private router: Router) { }
 
   ngOnInit() {
@@ -33,9 +33,16 @@ export class HomeComponent implements OnInit {
   		this.firebaseService.getAllEmployees().subscribe(managedEmps => {
   			this.managedEmps = managedEmps;
   		});
+      this.firebaseService.getManagerInfo().subscribe(managerInfo => {
+        this.manInfo = managerInfo;
+        console.log(this.manInfo.num);
+      });
   }
   edit(){
       this.router.navigate(['/owner-profile']);
+  }
+  add_vacancies(){
+      this.router.navigate(['/add-vacancies']);
   }
 
   onSubmit() {

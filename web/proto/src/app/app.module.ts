@@ -24,6 +24,9 @@ import { OwnerProfileComponent } from './components/owner-profile/owner-profile.
 import {ImageCropperComponent, CropperSettings} from 'ng2-img-cropper';
 import { EmpJobComponent } from './components/emp-job/emp-job.component';
 import { JobPageComponent } from './components/job-page/job-page.component';
+import { AddVacanciesComponent } from './components/add-vacancies/add-vacancies.component';
+import { EmpSignupComponent } from './components/emp-signup/emp-signup.component';
+import { JobsVacantComponent } from './components/jobs-vacant/jobs-vacant.component';
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -34,8 +37,10 @@ export const appRoutes: Routes = [
   {path:'signup', component:SignupComponent},
   {path:'owner-profile', component:OwnerProfileComponent},
   {path:'job-search', component:EmpJobComponent},
+  {path:'add-vacancies', component:AddVacanciesComponent},
   {path:'job-search/:id', component:JobPageComponent},
-
+  {path:'employee-signup', component:EmpSignupComponent},
+  {path:'jobs-vacant', component:JobsVacantComponent}
 ]
 
 @NgModule({
@@ -50,7 +55,10 @@ export const appRoutes: Routes = [
     OwnerProfileComponent,
     ImageCropperComponent,
     EmpJobComponent,
-    JobPageComponent
+    JobPageComponent,
+    AddVacanciesComponent,
+    EmpSignupComponent,
+    JobsVacantComponent
   ],
   imports: [
     BrowserModule,

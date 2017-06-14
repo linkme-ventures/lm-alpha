@@ -17,7 +17,7 @@ export class EmpJobComponent implements OnInit {
       {
         this.job="Hotel";
         console.log(listings);
-      this.listings=listings;
+        this.listings=listings;
     }
     );
   }
