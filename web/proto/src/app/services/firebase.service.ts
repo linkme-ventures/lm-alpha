@@ -20,6 +20,7 @@ export class FirebaseService {
 	addit:number;
 
 	checkjobapply:any[];
+	job_array:any[];
 	checkjobadd:any[];
 	job_apply:jobApply;
 	listings: FirebaseListObservable<any[]>;
@@ -30,6 +31,7 @@ export class FirebaseService {
 		this.folder="OwnerImages";
 		this.checkjobapply=[];
 		this.checkjobadd=[];
+		this.job_array=[];
 
   }
 
@@ -57,6 +59,7 @@ export class FirebaseService {
 		this.displOwn = this.afDb.object('/Managers/'+OwnerUid) as FirebaseObjectObservable<Owner>;
 		return this.displOwn;
 	}
+
 
 
 
@@ -195,6 +198,7 @@ export class FirebaseService {
 		this.job = this.afDb.object('/Managers/'+id) as FirebaseObjectObservable<Organisation>
 		return this.job;
 	}
+
 
 	checkJob(id){
 		this.listings = this.afDb.list('/StaffingReq') as FirebaseListObservable<jobApply[]>;
@@ -361,13 +365,36 @@ app2(id){
 
 
 
-
 	check_if_free_employee(){
 		//var x=0;
 
 		return this.afDb.list("/AvailableEmps/"+this.afAuth.auth.currentUser.uid).take(1);
 
 
+	}
+	see_jobs_added(){
+		this.checkjobadd=[];
+		this.job_array=[];
+
+			this.addit=1;
+			return this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/").take(1);
+				/*setTimeout(function () {
+					for(var i =0;i<that.checkjobadd.length;i++){
+							that.job = that.afDb.object("/Vacancies/"+that.checkjobadd[i].$key+"/vacInfo");
+							that.job.take(1).subscribe(xy =>
+								{
+									that.job_array[i]=xy;
+
+
+								});
+
+							}
+					}, 300); */
+					//setTimeout(function () { console.log(this.job_array);return this.job_array;},700);
+	}
+	see_job_details(key){
+		//console.log( this.afDb.object("/Vacancies/"+key+"/vacInfo").take(1));
+		return ( this.afDb.object("/Vacancies/"+key+"/vacInfo").take(1));
 	}
 	addJobRequirements(job_add){
 	this.checkjobadd=[];
@@ -433,11 +460,38 @@ app2(id){
 				}, 1000);
 
 	}
+		showApplicants(id){
+			this.checkjobadd=[];
+				this.addit=1;
+				return this.afDb.list("/Vacancies/"+id+"/applicants/").take(1);
+	}
 
 
 	getVacancies(){
 		this.listings = this.afDb.list('/Vacancies') as FirebaseListObservable<Organisation[]>;
 		return this.listings;
+	}
+	showApplicantName(id){
+		return this.afDb.object("/AvailableEmps/"+id);
+	}
+	add_random_key(vac_id,key,emp_id){
+		let updateMap2 = {};
+				updateMap2["/Vacancies/"+ vac_id + "/result/"+emp_id+"/random_key/"] =key;
+				updateMap2["/UserReq/"+emp_id+"/accepted/"+vac_id+"/random_key/"] = key;
+				firebase.database().ref().update(updateMap2).then((success) =>{
+					alert("You have accepted the request. Enter the employee code to add him.");
+
+				}).catch((error) => {
+					alert(error.message);
+					console.log(error);
+				});
+
+	}
+	accepted_requests_list(){
+		return this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/accepted/");
+	}
+	getManagerId(key){
+		return this.afDb.object('/Vacancies/'+key+'/protectedInfo/manId'+"/");
 	}
 
 }

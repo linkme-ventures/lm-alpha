@@ -28,8 +28,16 @@ export class EmpHomeComponent implements OnInit {
 	});
 
 	showEmp: any;
+  accepted:any;
+  organisation:any;
+  random_string:any;
+  x:any;
+  i:number;
 
   constructor(private firebaseService: FirebaseService, public afAuth: AngularFireAuth, private router: Router) {
+    this.accepted=[];
+    this.random_string=[];
+    this.organisation=[];
 
   }
 
@@ -50,6 +58,9 @@ export class EmpHomeComponent implements OnInit {
   search_companies(){
   //  this.router.navigate(['/job-search']);
   }
+  accepted_requests(){
+  this.router.navigate(['/accepted-list']);
+  }
   search_jobs(){
     var x=this.firebaseService.check_if_free_employee();
     //this.router.navigate(['/job-search']);
@@ -57,7 +68,7 @@ export class EmpHomeComponent implements OnInit {
 				keys.forEach(key => {
 					if(key.$key=='name'){
 						//var x=1;
-            alert("U ARE A FREE EMPLOYEE");
+          //  alert("U ARE A FREE EMPLOYEE");
             this.router.navigate(['/jobs-vacant']);
 
 					}

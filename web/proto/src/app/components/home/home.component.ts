@@ -41,6 +41,9 @@ export class HomeComponent implements OnInit {
   edit(){
       this.router.navigate(['/owner-profile']);
   }
+  see_job_applicants(){
+    this.router.navigate(['/jobs-added']);
+  }
   add_vacancies(){
       this.router.navigate(['/add-vacancies']);
   }

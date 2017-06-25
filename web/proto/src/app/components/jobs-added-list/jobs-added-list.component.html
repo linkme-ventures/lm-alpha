@@ -1,0 +1,13 @@
+<br><br><br><br>
+<ul class="list-group">
+  <div *ngFor="let listing of listings; let i = index" [attr.data-index]="i">
+    <div >
+      <li class="list-group-item" >
+          <a [routerLink]="['/applicant-list/'+next[i]]"><h3>Job : {{listing.job_role}}</h3></a><h6><b>Salary : Rs.{{listing.job_salary}} per month/-</b></h6>
+        <h4 *ngIf="listing.job_gender==1"> Gender : Male </h4>
+        <h4 *ngIf="listing.job_gender==2"> Gender : Female </h4>
+        <h4 *ngIf="listing.job_address==1">Location : RAMMURTHY NAGAR</h4>
+        <h4 *ngIf="listing.job_address==2">Location : KASTHURI NAGAR</h4>
+      </li>
+<br><br>
+    </div>

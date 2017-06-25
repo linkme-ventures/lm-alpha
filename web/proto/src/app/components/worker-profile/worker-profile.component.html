@@ -1,0 +1,18 @@
+<br><br><br><br><div class="list-group-item" ><h1>{{applicant.name}} </h1>
+<h3><b>Works in : </b>{{applicant.profession_type}}</h3>
+<h3><b>Phone No : </b>{{applicant.num}}</h3>
+<h3><b>Email ID : </b>{{applicant.email}}</h3>
+  <div class="row">
+    <div class="col-md-4">
+      <img style="width:100px" class="thumbnail" src="{{imageUrl}}">
+    </div>
+    <div class="col-md-8">
+      <h4><b>Details : </b>{{applicant.details}}</h4>
+
+
+          <button (click)="make_id()"class="btn btn-danger">Add Worker</button>
+          <button class="btn btn-danger">Delete Worker</button>
+    </div>
+
+  </div>
+</div>

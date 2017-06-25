@@ -1,0 +1,9 @@
+<br><br><br><br>
+<ul class="list-group">
+  <div *ngFor="let listing of listings; let i = index" [attr.data-index]="i">
+    <div >
+      <li class="list-group-item" >
+          <button (click)="routing(listing.$key)"><h3>{{listing.name}}</h3></button>
+      </li>
+<br><br>
+    </div>

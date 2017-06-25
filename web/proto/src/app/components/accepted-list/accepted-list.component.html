@@ -1,0 +1,9 @@
+<br><br><br><br>
+<ul class="list-group">
+  <div *ngFor="let listing of organisation; let m = index" [attr.data-index]="i">
+    <div >
+      <li class="list-group-item" >
+          <h4>{{listing}} <b>  OTP : {{random_string[m]}}</b></h4>
+      </li>
+<br><br>
+    </div>

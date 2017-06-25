@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseService } from './services/firebase.service';
+import { DataService } from './services/data.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -27,6 +28,10 @@ import { JobPageComponent } from './components/job-page/job-page.component';
 import { AddVacanciesComponent } from './components/add-vacancies/add-vacancies.component';
 import { EmpSignupComponent } from './components/emp-signup/emp-signup.component';
 import { JobsVacantComponent } from './components/jobs-vacant/jobs-vacant.component';
+import { JobsAddedListComponent } from './components/jobs-added-list/jobs-added-list.component';
+import { ApplicantListComponent } from './components/applicant-list/applicant-list.component';
+import { WorkerProfileComponent } from './components/worker-profile/worker-profile.component';
+import { AcceptedListComponent } from './components/accepted-list/accepted-list.component';
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -40,7 +45,12 @@ export const appRoutes: Routes = [
   {path:'add-vacancies', component:AddVacanciesComponent},
   {path:'job-search/:id', component:JobPageComponent},
   {path:'employee-signup', component:EmpSignupComponent},
-  {path:'jobs-vacant', component:JobsVacantComponent}
+  {path:'jobs-vacant', component:JobsVacantComponent},
+  {path:'jobs-added', component:JobsAddedListComponent},
+  {path:'applicant-list/:id', component:ApplicantListComponent},
+  {path:'applicant-profile/:id', component:WorkerProfileComponent},
+    {path:'accepted-list', component:AcceptedListComponent},
+  
 ]
 
 @NgModule({
@@ -58,7 +68,11 @@ export const appRoutes: Routes = [
     JobPageComponent,
     AddVacanciesComponent,
     EmpSignupComponent,
-    JobsVacantComponent
+    JobsVacantComponent,
+    JobsAddedListComponent,
+    ApplicantListComponent,
+    WorkerProfileComponent,
+    AcceptedListComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +84,7 @@ export const appRoutes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FirebaseService, AuthService, AuthGuard],
+  providers: [FirebaseService, AuthService, AuthGuard, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
