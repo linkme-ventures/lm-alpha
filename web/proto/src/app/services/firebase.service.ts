@@ -302,6 +302,10 @@ app2(id){
 },500);
 
 }
+
+
+
+
 	employeeApplyJob(id){
 		this.checkjobapply=[];
 		this.addit=1;
@@ -394,6 +398,7 @@ app2(id){
 	}
 	see_job_details(key){
 		//console.log( this.afDb.object("/Vacancies/"+key+"/vacInfo").take(1));
+
 		return ( this.afDb.object("/Vacancies/"+key+"/vacInfo").take(1));
 	}
 	addJobRequirements(job_add){
@@ -438,6 +443,8 @@ app2(id){
 
 							firebase.database().ref().update(updateMap).then((success) =>{
 								let updateMap2 = {};
+
+										//updateMap2["/Vacancies/"+ newReqId + "/active/"] ="true";
 										updateMap2["/Vacancies/"+ newReqId + "/vacInfo/"] =job_add;
 										updateMap2["/UserReq/"+that.afAuth.auth.currentUser.uid+"/open/"+newReqId+"/"] = "true";
 										firebase.database().ref().update(updateMap2).then((success) =>{
@@ -459,6 +466,31 @@ app2(id){
 						}
 				}, 1000);
 
+	}
+	get_entire_job_vacancy(index){
+		return this.afDb.object("/Vacancies/"+index);
+
+
+	}
+	delete_job(x,index){
+		let updateMap2 = {};
+
+				//updateMap2["/Vacancies/"+ newReqId + "/active/"] ="true";
+				updateMap2["/ClosedVacancies/"+ index] =x;
+				firebase.database().ref().update(updateMap2).then((success) =>{
+
+					this.afDb.object('/Vacancies/'+index).remove();
+
+					this.afDb.object('/UserReq/'+this.afAuth.auth.currentUser.uid+"/open/"+index).remove();
+					this.afDb.object('/UserReq/'+this.afAuth.auth.currentUser.uid+"/closed/"+index).set("true");
+					alert("You have successfully deleted the job");
+					return 1;
+
+
+				}).catch((error) => {
+					alert(error.message);
+					console.log(error);
+				});
 	}
 		showApplicants(id){
 			this.checkjobadd=[];
@@ -487,12 +519,33 @@ app2(id){
 				});
 
 	}
+	validate_OTP(vac_id,key,emp_id){
+		return this.afDb.object("/Vacancies/"+vac_id+"/result/"+emp_id).take(1);
+
+	}
 	accepted_requests_list(){
 		return this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/accepted/");
 	}
 	getManagerId(key){
 		return this.afDb.object('/Vacancies/'+key+'/protectedInfo/manId'+"/");
 	}
+	assign_free_employee(vac_id,emp_id,name){
+
+			this.afDb.list('/ManagedEmps').update(this.afAuth.auth.currentUser.uid, {[emp_id]:{'name':name}});
+			this.afDb.object('/AvailableEmps/'+emp_id+"/").remove();
+			this.afDb.object('/Vacancies/'+vac_id+"/result/"+emp_id).remove();
+			this.afDb.object('/Vacancies/'+vac_id+"/applicants/"+emp_id).remove();
+			this.afDb.object('/UserReq/'+emp_id+"/open/"+vac_id).remove();
+			this.afDb.object('/UserReq/'+emp_id+"/accepted/"+vac_id).remove();
+			this.afDb.object("/Vacancies/"+ vac_id + "/assigned-employees/"+emp_id).set("true");
+			this.afDb.object("/UserReq/"+emp_id+"/closed/"+vac_id).set("true");
+
+						alert("You have successfully added the employee to your organisations.");
+
+
+
+	}
+
 
 }
 

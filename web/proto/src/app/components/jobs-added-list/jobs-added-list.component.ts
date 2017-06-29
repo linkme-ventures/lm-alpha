@@ -32,5 +32,19 @@ export class JobsAddedListComponent implements OnInit {
          });
    });
   }
+  delete_job(index){
+    var x=confirm("Are you sure you want to delete the job vacancy?");
+    if(x){
+       this.firebaseService.get_entire_job_vacancy(index).subscribe(keys=>{
+         var c=this.firebaseService.delete_job(keys,index);
+         if(c){
+           alert(c);
+
+                 this.router.navigate(['/jobs-added']);}
+
+       });
+    }
+
+  }
 
 }

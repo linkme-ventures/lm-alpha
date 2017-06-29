@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 })
 export class WorkerProfileComponent implements OnInit {
   id:any;
+  x:any;
   applicant: any;
 
   imageUrl:any;
@@ -39,6 +40,32 @@ export class WorkerProfileComponent implements OnInit {
     });
   //  alert(this.dataService.data);
   }
+  enter_otp(){
+     var s= prompt("Enter OTP sent to woker", "");
+     this.firebaseService.validate_OTP(this.dataService.data,s,this.id).subscribe(keys =>{
+       //console.log(keys);
+       //alert(s);
+       if(keys.random_key==s){
+         alert("Correct OTP");
+        var ans= confirm("Are you Sure you want to add the employee?");
+        if (ans){
+          console.log(keys);
+        //  alert(this.dataService.data);
+      //    this.name_list=response;
+          //this.next[this.i]=key.$key;
+          //alert(keys.$key);
+        //  this.x =JSON.parse(JSON.stringify(response));
+        //  console.log(this.x);
+         this.firebaseService.assign_free_employee(this.dataService.data,this.id,this.applicant.name);
+          //this.firebaseService.assign_free_employee(this.dataService.data,this.id){}
+        //  alert(this.id);
+
+        }
+       }else{
+         alert("Wrong OTP");
+       }
+     });
+  }
   make_id()
 {
     var text = "";
@@ -52,7 +79,7 @@ export class WorkerProfileComponent implements OnInit {
 
 
 
-    alert(text);
+  //  alert(text);
 }
 
 }
