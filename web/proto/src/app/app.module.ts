@@ -32,6 +32,12 @@ import { JobsAddedListComponent } from './components/jobs-added-list/jobs-added-
 import { ApplicantListComponent } from './components/applicant-list/applicant-list.component';
 import { WorkerProfileComponent } from './components/worker-profile/worker-profile.component';
 import { AcceptedListComponent } from './components/accepted-list/accepted-list.component';
+import { UserComponent } from './components/user/user.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { AddEmpFormComponent } from './components/forms/add-emp-form/add-emp-form.component';
+import { ManageVacanciesComponent } from './components/manage-vacancies/manage-vacancies.component';
+import { AddVacancyComponent } from './components/forms/add-vacancy/add-vacancy.component';
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -49,8 +55,15 @@ export const appRoutes: Routes = [
   {path:'jobs-added', component:JobsAddedListComponent},
   {path:'applicant-list/:id', component:ApplicantListComponent},
   {path:'applicant-profile/:id', component:WorkerProfileComponent},
-    {path:'accepted-list', component:AcceptedListComponent},
-  
+  {path:'accepted-list', component:AcceptedListComponent},
+  {path:'user', component:UserComponent, canActivate: [AuthGuard],
+    children: [
+      { path:'', redirectTo:'dashboard', pathMatch:'full'},
+      { path:'dashboard', component:DashboardComponent},
+      { path:'addEmp', component:AddEmployeeComponent},
+      { path:'manage-vacancies', component:ManageVacanciesComponent}  
+    ]
+  }
 ]
 
 @NgModule({
@@ -72,7 +85,13 @@ export const appRoutes: Routes = [
     JobsAddedListComponent,
     ApplicantListComponent,
     WorkerProfileComponent,
-    AcceptedListComponent
+    AcceptedListComponent,
+    UserComponent,
+    DashboardComponent,
+    AddEmployeeComponent,
+    AddEmpFormComponent,
+    ManageVacanciesComponent,
+    AddVacancyComponent
   ],
   imports: [
     BrowserModule,

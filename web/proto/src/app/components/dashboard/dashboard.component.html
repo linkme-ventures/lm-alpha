@@ -1,0 +1,93 @@
+<div class="row">
+	<div class="col-md-4">
+		<div class="card card-stats">
+			<div class="card-header" data-background-color="orange">
+				<i class="material-icons">person</i>
+			</div>
+			<div class="card-content">
+				<p class="category">Workers</p>
+				<h3 class="title">5</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<i class="material-icons text-info">info</i> <a [routerLink]="'../addEmp'" >Add More Workers...</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card card-stats">
+			<div class="card-header" data-background-color="green">
+				<i class="material-icons">list</i>
+			</div>
+			<div class="card-content">
+				<p class="category">Vacancies</p>
+				<h3 class="title">1</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<i class="material-icons">date_range</i> <a [routerLink]="['../manage-vacancies']" >Add More...</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card card-stats">
+			<div class="card-header" data-background-color="red">
+				<i class="material-icons">exit_to_app</i>
+			</div>
+			<div class="card-content">
+				<p class="category">Terminations</p>
+				<h3 class="title">1</h3>
+			</div>
+			<div class="card-footer">
+				<div class="stats">
+					<i class="material-icons">local_offer</i> Tracked from Worker Job Searches
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+        <div class="card card-plain">
+            <div class="card-header" data-background-color="blue">
+                <h4 class="title al-cen">Employed Workers</h4>
+            </div>
+    	</div>
+	</div>
+</div>
+<div class="row">
+	<div *ngIf="allEmpDetails?.length>0">
+		<div class="col-md-6 worker-li" *ngFor="let managedEmp of allEmpDetails">
+			<div class="card card-profile">
+				<div class="card-avatar">
+					<a href="#">
+						<img class="img" src="../assets/img/icons8-User-96.png">
+					</a>
+				</div>
+
+				<div class="content">
+					<h6 class="category text-gray">{{managedEmp.pos}}</h6>
+					<h4 class="card-title"><b>{{managedEmp.name}}</b></h4>
+					<table class="table table-hover">
+						<tbody>
+							<tr>
+								<td>Experience: <b>{{managedEmp.exp}} years</b></td>
+								<td>Salary: <b>&#8377;{{managedEmp.sal}}</b></td>
+							</tr>
+						</tbody>
+					</table>
+					<a href="#" class="btn btn-primary btn-round">Review</a>
+				</div>
+			</div>
+		</div>
+	</div>	  					
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<a [routerLink]="'../addEmp'" class="btn btn-primary btn-round btn-lg dv-al">Add Worker</a>
+	</div>	
+</div>

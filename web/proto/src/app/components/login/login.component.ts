@@ -5,12 +5,15 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { FirebaseService } from '../../services/firebase.service';
+import {ViewEncapsulation} from '@angular/core';
 
+declare var $:any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  encapsulation: ViewEncapsulation.None,             
 })
 export class LoginComponent  {
 	user: Observable<firebase.User>;
@@ -24,7 +27,6 @@ export class LoginComponent  {
 	});
 
   constructor(public afAuth: AngularFireAuth, private router: Router, private firebaseService: FirebaseService) {
-  	console.log('Routes comp: ', JSON.stringify(router.config, undefined, 2));
     this.user = afAuth.authState;
   }
 
@@ -34,7 +36,7 @@ export class LoginComponent  {
   		console.log(success);
   		this.firebaseService.getManager(this.afAuth.auth.currentUser.uid).subscribe(manager => {
   			if(manager.val()!=null){
-  				this.router.navigate(['/home']);
+  				this.router.navigate(['/user/dashboard']);
   			}else{
   				this.router.navigate(['/emp-home']);
   			}
@@ -67,7 +69,7 @@ export class LoginComponent  {
   }
 
   ngOnInit() {
-
+      $.getScript('../assets/js/material-kit.js');
   }
 
 

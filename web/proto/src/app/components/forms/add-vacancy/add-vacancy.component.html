@@ -1,0 +1,53 @@
+<div class="card">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">New Vacancy</h4>
+			<p class="category">Post a new vacancy for your business</p>
+        </div>
+        <div class="card-content">
+			<form [formGroup]="addVacancyForm" (ngSubmit)="onSubmit()">
+			    <div class="row">
+			        <div class="col-md-6">
+						<div class="form-group label-floating">
+							<label class="control-label">Select Gender</label>
+							 <select  formControlName="job_gender" class="form-control" type="text" class="form-control" id="job_gender" required>
+								<option value="1">Male</option>
+								<option value="2">Female</option>
+							  </select>
+						</div>
+			        </div>
+			        <div class="col-md-6">
+						<div class="form-group label-floating">
+							<label class="control-label">Salary per month</label>
+							<input formControlName="job_salary" type="text" class="form-control" id="job_salary" required>
+						</div>
+			        </div>
+			    </div>
+
+			    <div class="row">
+					<div class="col-md-12">
+						<div class="form-group label-floating">
+							<label class="control-label">Address of the job</label>
+							 <select  formControlName="job_address" class="form-control" type="text" class="form-control" id="job_address" required>
+							  <option value="1">RamMurthy Nagar</option>
+							  <option value="2">Kasthuri Nagar</option>
+							 </select>
+						</div>
+					</div>
+				</div>
+
+			    <div class="row">
+					<div class="col-md-12">
+						<div class="form-group label-floating">
+							<label class="control-label">Job Role</label>
+							<input formControlName="job_role" type="text" class="form-control" id="job_role" required>
+						</div>
+			        </div>
+			    </div>
+				
+					
+
+			    <button type="submit" class="btn btn-primary pull-right">Post</button>
+			    <div class="clearfix"></div>
+			</form>
+	</div>
+</div>

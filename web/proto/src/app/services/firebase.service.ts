@@ -139,15 +139,15 @@ export class FirebaseService {
   	var fbApp2 =  firebase2.initializeApp(environment.firebase,"workerApp");
   	var fbAuth2 = fbApp2.auth();
   	var fbDb2 = fbApp2.database();
-
-  	 fbAuth2.createUserWithEmailAndPassword(employee.email, "Welcome123").then((firebaseUser) => {
+  	 fbAuth2.createUserWithEmailAndPassword(employee.details.email, employee.pwdGrp.password1).then((firebaseUser) => {
     	console.log("User " + firebaseUser.uid + " created successfully!");
-     	fbDb2.ref('/Employees/'+firebaseUser.uid).set(employee).then((success) => {
+     	fbDb2.ref('/Employees/'+firebaseUser.uid).set(employee.details).then((success) => {
      			fbAuth2.signOut();
 				fbApp2.delete();
      	});
-     	this.afDb.list('/ManagedEmps').update(this.afAuth.auth.currentUser.uid, {[firebaseUser.uid]:{'name':employee.name}})
-		});
+     	this.afDb.list('/ManagedEmps').update(this.afAuth.auth.currentUser.uid, {[firebaseUser.uid]:{'name':employee.details.name}})
+     	alert("Profile was created successfully");
+	});
 	console.log(this.afAuth.auth.currentUser.uid);
   }
 
