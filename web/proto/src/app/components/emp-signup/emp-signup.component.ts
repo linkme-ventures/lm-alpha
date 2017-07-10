@@ -5,26 +5,36 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { FirebaseService } from '../../services/firebase.service';
+import {ViewEncapsulation} from '@angular/core';
+
+declare var $:any;
 
 @Component({
   selector: 'app-emp-signup',
   templateUrl: './emp-signup.component.html',
-  styleUrls: ['./emp-signup.component.css']
+  styleUrls: ['./emp-signup.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EmpSignupComponent implements OnInit {
 
   data: any;
 //cropper:ImageCropperComponent;
 //cropperSettings:CropperSettings;
-  empSignForm = new FormGroup ({
-    name: new FormControl(),
-
-    num: new FormControl(),
-    email: new FormControl(),
-    password1: new FormControl(),
-    password2: new FormControl(),
-    profession_type: new FormControl(),
-    details: new FormControl()
+ empSignForm = new FormGroup ({
+    details: new FormGroup ({
+      name: new FormControl(),
+      pos: new FormControl(),
+      exp: new FormControl(),
+      num: new FormControl(),
+      email: new FormControl(),
+      uid: new FormControl(),
+      sal: new FormControl(),
+      profession_type: new FormControl()
+    }), 
+    pwdGrp: new FormGroup ({
+        password1: new FormControl(),
+        password2: new FormControl(),
+      })
   });
 
   user: Observable<firebase.User>;
@@ -35,9 +45,11 @@ export class EmpSignupComponent implements OnInit {
      }
 
   ngOnInit() {
+      $.getScript('../assets/js/material-kit.js');
   }
+
   onSubmit(){
-    if((this.empSignForm.get('password1').value)==(this.empSignForm.get('password2').value)){
+    if((this.empSignForm.get('pwdGrp.password1').value)==(this.empSignForm.get('pwdGrp.password2').value)){
       this.firebaseService.employeeSignup(this.empSignForm.value);
 
     }else{

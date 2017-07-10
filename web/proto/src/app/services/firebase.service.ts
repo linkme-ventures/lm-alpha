@@ -98,42 +98,39 @@ export class FirebaseService {
 						console.log(error);
 					});
   }
-	employeeSignup(employee){
-					this.folder="EmployeeImages";
-					this.afAuth.auth.createUserWithEmailAndPassword(employee.email, employee.password1).then((success) => {
-					console.log(success);
-					console.log(this.afAuth.auth.currentUser.uid);
-					this.empsignup = this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid) as FirebaseObjectObservable<EmployeeSignupInterface>;
-					let storageRef = firebase.storage().ref();
-					for(let selectedFile of [(<HTMLInputElement>document.getElementById('image_employee')).files[0]]){
-						let path = `/${this.folder}/${this.afAuth.auth.currentUser.uid}/${selectedFile.name}`;
-						let iRef = storageRef.child(path);
-						iRef.put(selectedFile).then((snapshot) => {
-							employee.image = selectedFile.name;
-							employee.path = path;
-							this.empsignup.set(employee).then((success) => {
-									this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid+'/password1').remove();
-									this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid+'/password2').remove();
-
-									this.afDb.object('/AvailableEmps/'+this.afAuth.auth.currentUser.uid+'/name/').set(employee.name).then((success) =>{
-								//alert("You have successfully applied for this job");
-									}).catch((error) => {
-										//alert("Job applied but request not sent: "+ error.message);
-										console.log(error);
-										});
-
-									alert("Profile was created successfully");
-							}).catch((error) => {
-									alert(error.message);
-									console.log(error);
-								});
-						});
-					}
+employeeSignup(employee){
+	this.folder="EmployeeImages";
+	this.afAuth.auth.createUserWithEmailAndPassword(employee.details.email, employee.pwdGrp.password1).then((success) => {
+	console.log(success);
+	console.log(this.afAuth.auth.currentUser.uid);
+	this.empsignup = this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid) as FirebaseObjectObservable<EmployeeSignupInterface>;
+	let storageRef = firebase.storage().ref();
+	for(let selectedFile of [(<HTMLInputElement>document.getElementById('image_employee')).files[0]]){
+		let path = `/${this.folder}/${this.afAuth.auth.currentUser.uid}/${selectedFile.name}`;
+		let iRef = storageRef.child(path);
+		iRef.put(selectedFile).then((snapshot) => {
+			employee.details.image = selectedFile.name;
+			employee.details.path = path;
+			this.empsignup.set(employee.details).then((success) => {
+				this.afDb.object('/AvailableEmps/'+this.afAuth.auth.currentUser.uid+'/name/').set(employee.details.name).then((success) =>{
+					alert("Profile was created successfully");
 				}).catch((error) => {
-						alert(error.message);
-						console.log(error);
+					alert(error.message);
+					console.log(error);
 					});
-  }
+
+			}).catch((error) => {
+					alert(error.message);
+					console.log(error);
+				});
+		});
+	}
+	}).catch((error) => {
+			alert(error.message);
+			console.log(error);
+		});
+}
+
   addEmployee(employee){
   	console.log(this.afAuth.auth.currentUser.uid);
   	var fbApp2 =  firebase2.initializeApp(environment.firebase,"workerApp");
