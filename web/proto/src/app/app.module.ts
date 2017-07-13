@@ -38,6 +38,7 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { AddEmpFormComponent } from './components/forms/add-emp-form/add-emp-form.component';
 import { ManageVacanciesComponent } from './components/manage-vacancies/manage-vacancies.component';
 import { AddVacancyComponent } from './components/forms/add-vacancy/add-vacancy.component';
+import { OwnerSignupComponent } from './components/forms/owner-signup/owner-signup.component';
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -91,7 +92,8 @@ export const appRoutes: Routes = [
     AddEmployeeComponent,
     AddEmpFormComponent,
     ManageVacanciesComponent,
-    AddVacancyComponent
+    AddVacancyComponent,
+    OwnerSignupComponent
   ],
   imports: [
     BrowserModule,

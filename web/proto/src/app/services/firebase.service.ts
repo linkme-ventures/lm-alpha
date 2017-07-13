@@ -67,7 +67,7 @@ export class FirebaseService {
 
 	addOwner(owner){
 
-					this.afAuth.auth.createUserWithEmailAndPassword(owner.email, owner.password1).then((success) => {
+					this.afAuth.auth.createUserWithEmailAndPassword(owner.details.email, owner.pwdGrp.password1).then((success) => {
 					console.log(success);
 					console.log(this.afAuth.auth.currentUser.uid);
 					this.owners = this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid) as FirebaseObjectObservable<Owner>;
@@ -76,17 +76,15 @@ export class FirebaseService {
 						let path = `/${this.folder}/${this.afAuth.auth.currentUser.uid}/${selectedFile.name}`;
 						let iRef = storageRef.child(path);
 						iRef.put(selectedFile).then((snapshot) => {
-							owner.image = selectedFile.name;
-							owner.path = path;
+							owner.details.image = selectedFile.name;
+							owner.details.path = path;
 							for(let selectedFile of [(<HTMLInputElement>document.getElementById('image_organisation')).files[0]]){
 								let path = `/${this.folder}/${this.afAuth.auth.currentUser.uid}/${selectedFile.name}`;
 								let iRef = storageRef.child(path);
 								iRef.put(selectedFile).then((snapshot) => {
-										owner.orgnaisation_image = selectedFile.name;
-										owner.orgnaisation_image_path = path;
-										this.owners.set(owner).then((success) => {
-												this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid+'/password1').remove();
-												this.afDb.object('/Managers/'+this.afAuth.auth.currentUser.uid+'/password2').remove();
+										owner.details.organisation_image = selectedFile.name;
+										owner.details.organisation_image_path = path;
+										this.owners.set(owner.details).then((success) => {
 												alert("Profile was created successfully");
 										});
 								});

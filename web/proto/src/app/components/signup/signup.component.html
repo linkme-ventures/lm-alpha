@@ -1,75 +1,29 @@
+<div class="signup-page">
+<nav class="navbar navbar-transparent navbar-absolute">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LinkMe</a>
+          </div>
+
+  </div>
+    </nav>
+<div class="wrapper">
+  <div class="header header-filter" style="background-image: url('../assets/img/makeup.jpg'); background-size: cover; background-position: top center;">
+    <div class="container">
+        
 <div class="row">
-    <div class="col-sm-8">
-      <div class="well">
-      <form [formGroup]="signForm" class="reg-form" role="form" (ngSubmit)="onSubmit()">
-			<div class="form-group">
-				<input formControlName="person_name" type="text" class="form-control" id="person_name" placeholder="Enter name"required>
-			</div>
-      <div class="form-group">
-        <input formControlName="organisation_name" type="text" class="form-control" id="organisation_name" placeholder="Enter Organisation name" required>
-      </div>
-      <div class="form-group">
-        <input formControlName="num" type="text" class="form-control" id="num" placeholder="Enter contact number" required>
-      </div>
-      <div class="form-group">
-				<input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email">
-			</div>
-      <div class="form-group">
-        <input formControlName="password1" type="password" class="form-control" id="password1" placeholder="Enter password">
-      </div>
-      <div class="form-group">
-        <input formControlName="password2" type="password" class="form-control" id="password2" placeholder="Confirm password">
-      </div>
-
-      <!--<div>
-              <img-cropper id="image_owner" name="image_owner" [image]="data" [settings]="cropperSettings"></img-cropper><br>
-              <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-          </div>-->
-
-      <div class="form-group">
-				<input formControlName="registration_number" type="text" class="form-control" id="registration_type" placeholder="Enter the registration Number">
-			</div>
-      <div class="form-group">
-        <input formControlName="isManager" type="hidden" value="true"class="form-control" id="isManager" placeholder="Enter the registration Number">
-      </div>
-
-      <div class="form-group">
-        Organisation Type :
-        <select   formControlName="organisation_type" class="form-control" type="text" class="form-control" id="organisation_type" required>
-          <option value="Salon and Spa">Salon and Spa</option>
-          <option value="Hotel">Hotel</option>
-        </select>
-      </div>
-
-    <div class="form-group">
-           Owner Image :
-        <input id="image_owner" name="image_owner" resize-quality="0.5" type="file" >
-      </div>
-
-
-      <div class="form-group">
-           Organisation Image :
-        <input id="image_organisation" name="image_organisation" type="file" >
-      </div>
-			<div class="form-group">
-			    <textarea formControlName="details" class="form-control" rows="5" id="details" placeholder="Enter the details about the organisation.(Optional)"></textarea>
-			</div>
-
-      <!--<div class="file-upload">
-          <span class="text">upload</span>
-          <input id="custom-input" type="file" (change)="fileChangeListener($event)">
-      </div>
-      <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
-      <br>
-      <span class="result rounded" *ngIf="data.image" >
-          <img [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-      </span>-->
-
-
-      <div class="form-group">
-			     <button type="submit" class="btn btn-default">Sign Up</button>
-      </div>
-		  </form>
-      </div>
-    </div>
+          <div class="col-md-6 col-md-offset-3">
+            <app-owner-signup></app-owner-signup>
+          </div>
+        </div>
+</div>
+  </div>
+</div>      
 </div>

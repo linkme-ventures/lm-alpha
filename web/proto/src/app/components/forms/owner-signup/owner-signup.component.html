@@ -1,22 +1,39 @@
 <div class="card card-signup">
         <div class="card-header" data-background-color="purple">
-            <h4 class="title">Add Worker</h4>
-			<p class="category">Register a new worker for your business</p>
+            <h4 class="title">Owner Signup</h4>
+			<p class="category">Register as a business owner</p>
         </div>
         <div class="card-content">
-			<form [formGroup]="empSignForm" (ngSubmit)="onSubmit()">
+			<form [formGroup]="signForm" (ngSubmit)="onSubmit()">	
 			    <div class="row">
 			        <div class="col-md-9">
 						<div formGroupName="details" class="form-group label-floating">
 							<label class="control-label">Full Name</label>
-							<input formControlName="name" type="text" class="form-control" id="name" required>
+							<input formControlName="person_name" type="text" class="form-control" id="person_name" required>
 						</div>
 			        </div>
 			        <div class="col-md-3">
 						<div formGroupName="details" class="form-group label-floating">
 							<label class="control-label">Profile Photo</label>
 							<span class="btn btn-default btn-sm">
-			                  Upload&hellip; <input id="image_employee" name="image_employee" type="file" >
+			                  Upload&hellip; <input id="image_owner" name="image_owner" resize-quality="0.5" type="file" >
+			              </span>
+						</div>
+			        </div>
+			    </div>
+
+			    <div class="row">
+			        <div class="col-md-9">
+						<div formGroupName="details" class="form-group label-floating">
+							<label class="control-label">Organisation Name</label>
+							<input formControlName="organisation_name" type="text" class="form-control" id="organisation_name" required>
+						</div>
+			        </div>
+			        <div class="col-md-3">
+						<div formGroupName="details" class="form-group label-floating">
+							<label class="control-label">Organisation Image</label>
+							<span class="btn btn-default btn-sm">
+			                  Upload&hellip;  <input id="image_organisation" name="image_organisation" type="file" >
 			              </span>
 						</div>
 			        </div>
@@ -52,27 +69,24 @@
 			        </div>
 			    </div>
 			     <div class="row">
-			    	<div class="col-md-4">
+			    	<div class="col-md-6">
 						<div formGroupName="details" class="form-group label-floating">
-							<label class="control-label">Job role</label>
-							<input formControlName="pos" type="text" class="form-control" id="posn">
+							<label class="control-label">Organisation Type</label>
+							<select   formControlName="organisation_type" class="form-control" type="text" class="form-control" id="organisation_type" required>
+					          <option value="Salon and Spa">Salon and Spa</option>
+					          <option value="Hotel">Hotel</option>
+					        </select>
 						</div>
 			        </div>
-			    	 <div class="col-md-4">
+			    	 <div class="col-md-6">
 						<div formGroupName="details" class="form-group label-floating">
-							<label class="control-label">Experience in years</label>
-							<input formControlName="exp" type="text" class="form-control" id="exp">
-						</div>
-			        </div>
-			        <div class="col-md-4">
-						<div formGroupName="details" class="form-group label-floating">
-							<label class="control-label">Salary</label>
-							<input formControlName="sal" type="text" class="form-control" id="sal">
+							<label class="control-label">Registration Number</label>
+							<input formControlName="registration_number" type="text" class="form-control" id="registration_number">
 						</div>
 			        </div>
 			    </div>
 
-			    <button type="submit" class="btn btn-primary pull-right">Add and Register</button>
+			    <button type="submit" class="btn btn-primary pull-right">Register</button>
 			    <div class="clearfix"></div>
 			</form>
 	</div>
