@@ -43,9 +43,11 @@
 						</div>
 			        </div>
 			    </div>
-				
-					
 
+				<div [hidden]="true" class="form-group">
+			        <input formControlName="job_category" type="text" [(ngModel)]="manInfo.organisation_type"  class="form-control" id="job_category" value="{{manInfo.organisation_type}}" disabled>
+			    </div>
+					
 			    <button type="submit" class="btn btn-primary pull-right">Post</button>
 			    <div class="clearfix"></div>
 			</form>

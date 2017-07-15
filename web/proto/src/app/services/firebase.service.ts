@@ -147,7 +147,13 @@ employeeSignup(employee){
   }
 
  updateEmployee(employee){
-    this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid).update(employee);
+    this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid).update(employee.details).then((success) => {
+		console.log(success);
+		alert("Profile was updated successfully");
+		}).catch((error) => {
+			alert(error.message);
+			console.log(error);
+			});
   }
 
 

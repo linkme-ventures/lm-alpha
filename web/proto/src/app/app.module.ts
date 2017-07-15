@@ -39,6 +39,10 @@ import { AddEmpFormComponent } from './components/forms/add-emp-form/add-emp-for
 import { ManageVacanciesComponent } from './components/manage-vacancies/manage-vacancies.component';
 import { AddVacancyComponent } from './components/forms/add-vacancy/add-vacancy.component';
 import { OwnerSignupComponent } from './components/forms/owner-signup/owner-signup.component';
+import { EUserComponent } from './components/e-user/e-user.component';
+import { EProfileComponent } from './components/e-user/e-profile/e-profile.component';
+import { SearchJobsComponent } from './components/e-user/search-jobs/search-jobs.component';
+import { AppliedJobsComponent } from './components/e-user/applied-jobs/applied-jobs.component';
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -54,15 +58,23 @@ export const appRoutes: Routes = [
   {path:'employee-signup', component:EmpSignupComponent},
   {path:'jobs-vacant', component:JobsVacantComponent},
   {path:'jobs-added', component:JobsAddedListComponent},
-  {path:'applicant-list/:id', component:ApplicantListComponent},
-  {path:'applicant-profile/:id', component:WorkerProfileComponent},
   {path:'accepted-list', component:AcceptedListComponent},
   {path:'user', component:UserComponent, canActivate: [AuthGuard],
     children: [
       { path:'', redirectTo:'dashboard', pathMatch:'full'},
       { path:'dashboard', component:DashboardComponent},
       { path:'addEmp', component:AddEmployeeComponent},
+      {path:'applicant-list/:id', component:ApplicantListComponent},
+      {path:'applicant-profile/:id', component:WorkerProfileComponent},
       { path:'manage-vacancies', component:ManageVacanciesComponent}  
+    ]
+  },
+  {path:'e-user', component:EUserComponent, canActivate: [AuthGuard],
+    children: [
+      { path:'', redirectTo:'profile', pathMatch:'full'},
+      { path:'profile', component:EProfileComponent},
+      { path:'search-jobs', component:SearchJobsComponent},
+      {path:'applied-jobs', component:AppliedJobsComponent}
     ]
   }
 ]
@@ -93,7 +105,11 @@ export const appRoutes: Routes = [
     AddEmpFormComponent,
     ManageVacanciesComponent,
     AddVacancyComponent,
-    OwnerSignupComponent
+    OwnerSignupComponent,
+    EUserComponent,
+    EProfileComponent,
+    SearchJobsComponent,
+    AppliedJobsComponent
   ],
   imports: [
     BrowserModule,

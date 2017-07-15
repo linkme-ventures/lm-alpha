@@ -3,7 +3,7 @@
     <div >
       <li class="list-group-item" >
         <div>
-          <a [routerLink]="['/applicant-list/'+next[i]]"><h3>Job : {{listing.job_role}}</h3></a><h6><b>Salary : Rs.{{listing.job_salary}} per month/-</b></h6>
+          <a [routerLink]="['/user/applicant-list/'+next[i]]"><h3>Job : {{listing.job_role}}</h3></a><h6><b>Salary : Rs.{{listing.job_salary}} per month/-</b></h6>
             <button type="button" style="float:right;"(click)="delete_job(next[i])" class="btn btn-danger">Delete Job</button>
         </div>
         <h4 *ngIf="listing.job_gender==1"> Gender : Male </h4>

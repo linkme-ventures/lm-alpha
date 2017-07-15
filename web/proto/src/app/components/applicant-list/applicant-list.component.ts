@@ -23,8 +23,7 @@ export class ApplicantListComponent implements OnInit {
 
   routing(a){
     this.dataService.data=this.id;
-    this.router.navigate(['/applicant-profile/'+a]);
-
+    this.router.navigate(['/user/applicant-profile/'+a]);
   }
 
   ngOnInit() {

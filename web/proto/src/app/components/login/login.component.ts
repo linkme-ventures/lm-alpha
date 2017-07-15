@@ -13,7 +13,7 @@ declare var $:any;
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  encapsulation: ViewEncapsulation.None,             
+  encapsulation: ViewEncapsulation.None             
 })
 export class LoginComponent  {
 	user: Observable<firebase.User>;
@@ -38,7 +38,7 @@ export class LoginComponent  {
   			if(manager.val()!=null){
   				this.router.navigate(['/user/dashboard']);
   			}else{
-  				this.router.navigate(['/emp-home']);
+  				this.router.navigate(['/e-user/profile']);
   			}
   		});
   		console.log(this.afAuth.auth.currentUser.uid);

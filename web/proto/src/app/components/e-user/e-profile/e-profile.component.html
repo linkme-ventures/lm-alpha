@@ -1,0 +1,64 @@
+<div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="card card-signup">
+        <div class="card-header" data-background-color="purple">
+            <h4 class="title">Update Profile</h4>
+      <p class="category">Update your details for any corrections</p>
+        </div>
+        <div class="card-content">
+      <form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+              <div class="col-md-9">
+            <div formGroupName="details" class="form-group label-floating">
+              <label class="control-label">Full Name</label>
+              <input formControlName="name" type="text" class="form-control" id="name" required>
+            </div>
+              </div>
+              <!--div class="col-md-3">
+            <div formGroupName="details" class="form-group label-floating">
+              <label class="control-label">Profile Photo</label>
+              <span class="btn btn-default btn-sm">
+                        Upload&hellip; <input id="image_employee" name="image_employee" type="file" >
+                    </span>
+            </div>
+              </div-->
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+            <div formGroupName="details" class="form-group label-floating">
+              <label class="control-label">Contact Number</label>
+              <input formControlName="num" type="text" class="form-control" id="num" required>
+            </div>
+              </div>
+             <div class="col-md-8">
+            <div formGroupName="details" class="form-group label-floating">
+              <label class="control-label">Email address</label>
+              <input formControlName="email" type="email" class="form-control" id="email" >
+            </div>
+              </div>
+          </div>
+ 
+         <div class="row">
+             <div class="col-md-6">
+              <div formGroupName="details" class="form-group label-floating">
+                <label class="control-label">Experience in years</label>
+                <input formControlName="exp" type="text" class="form-control" id="exp">
+              </div>
+              </div>
+            <div class="col-md-6">
+            <div formGroupName="details" class="form-group label-floating">
+              <label class="control-label">Salary</label>
+              <input formControlName="sal" type="text" class="form-control" id="sal">
+            </div>
+              </div>
+            </div>  
+
+          <button type="submit" class="btn btn-primary pull-right">Update</button>
+          <div class="clearfix"></div>
+      </form>
+  </div>
+</div>
+
+          </div>
+        </div>
