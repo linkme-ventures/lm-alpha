@@ -283,18 +283,13 @@ app2(id){
 		setTimeout(function () {
 			if(that.addit==1){
 
-
 	let updateMap = {};
 	updateMap["/Vacancies/"+ id + "/applicants/"+that.afAuth.auth.currentUser.uid] = "true";
+	updateMap["/UserReq/"+that.afAuth.auth.currentUser.uid+"/open/"+id] = "true";
 		firebase.database().ref().update(updateMap).then((success) =>{
-			that.afDb.object("/UserReq/"+that.afAuth.auth.currentUser.uid+"/open/"+id).set("true").then((success) =>{
-		alert("You have successfully applied for this job");
-			}).catch((error) => {
-				alert("Job applied but request not sent: "+ error.message);
-				console.log(error);
-				});
+			alert("You have successfully applied for this job");
 		}).catch((error) => {
-			alert(error.message);
+			alert("Job applied but request not sent: "+ error.message);
 			console.log(error);
 		});
 	}else{
@@ -382,7 +377,7 @@ app2(id){
 		this.job_array=[];
 
 			this.addit=1;
-			return this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/").take(1);
+			return this.afDb.list("/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/");
 				/*setTimeout(function () {
 					for(var i =0;i<that.checkjobadd.length;i++){
 							that.job = that.afDb.object("/Vacancies/"+that.checkjobadd[i].$key+"/vacInfo");
@@ -493,6 +488,21 @@ app2(id){
 					console.log(error);
 				});
 	}
+
+	delete_appl(vac_uid){
+		let updateMap = {};
+		updateMap["/Vacancies/"+ vac_uid + "/applicants/"+this.afAuth.auth.currentUser.uid] = null;
+		updateMap["/UserReq/"+this.afAuth.auth.currentUser.uid+"/open/"+vac_uid] = null;
+		firebase.database().ref().update(updateMap).then((success) =>{
+			alert("You have successfully deleted your application for this job");
+			return 1;
+		}).catch((error) => {
+			alert("Job application not deleted: "+ error.message);
+			console.log(error);
+		});
+		return -1;
+	}
+
 		showApplicants(id){
 			this.checkjobadd=[];
 				this.addit=1;

@@ -1,3 +1,19 @@
-<p>
-  applied-jobs works!
-</p>
+<div *ngIf="listings?.length>0">
+<h3>Applied Jobs: </h3>
+<ul class="list-group">
+  <div *ngFor="let listing of listings; let i = index" [attr.data-index]="i">
+    <div >
+      <li class="list-group-item" >
+        <div>
+          <h3>Job : {{listing.job_role}}</h3><h6><b>Salary : Rs.{{listing.job_salary}} per month/-</b></h6>
+            <button type="button" style="float:right;"(click)="delete_job(next[i])" class="btn btn-danger">Delete</button>
+        </div>
+        <h4 *ngIf="listing.job_gender==1"> Gender : Male </h4>
+        <h4 *ngIf="listing.job_gender==2"> Gender : Female </h4>
+        <h4 *ngIf="listing.job_address==1">Location : RAMMURTHY NAGAR</h4>
+        <h4 *ngIf="listing.job_address==2">Location : KASTHURI NAGAR</h4>
+        <h4 *ngIf="listing.otp!=null">Application Accepted. OTP: {{listing.otp}}</h4>
+      </li>
+<br><br>
+    </div>
+</div>

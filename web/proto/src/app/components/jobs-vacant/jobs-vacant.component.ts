@@ -13,9 +13,20 @@ export class JobsVacantComponent implements OnInit {
     job:any;
     x:any;
     y:any;
+    isFree: any;
+
     constructor(private firebaseService:FirebaseService) { }
 
     ngOnInit() {
+      this.firebaseService.check_if_free_employee().subscribe(availEmpData =>
+        {
+          if(availEmpData==""){
+            this.isFree=false;
+          }
+          else{
+            this.isFree=true; 
+          }  
+        });
       this.firebaseService.getVacancies().subscribe(listings =>
         {
           this.job="Hotel";
@@ -31,22 +42,24 @@ export class JobsVacantComponent implements OnInit {
       }
       );
     }
+    
     apply(key){
-      if(confirm("Are you sure you want to apply?"+this.y[key].$key)){
-       this.firebaseService.app2(this.y[key].$key);
-
-
-      //  alert("Successfully Applied");
+      if(this.isFree){
+        if(confirm("Are you sure you want to apply?"+this.y[key].$key)){
+          this.firebaseService.app2(this.y[key].$key);
+        }
+      }
+      else{
+        alert("Sorry ! You are a working Employee! You Cannot search for Jobs unless you quit the present job. ");
       }
     }
 
     salonSearch(){
       this.job="Salon and Spa";
-
     }
+
     hotelSearch(){
       this.job="Hotel";
-
     }
 
 }
