@@ -21,6 +21,11 @@ export class EProfileComponent implements OnInit {
 	      sal: new FormControl(),
 	      image: new FormControl(),
 	      path: new FormControl(),
+	      profession_type: new FormControl(),
+	      manId: new FormControl(),
+	      searchedForJobs: new FormControl({
+	      	notified: new FormControl()
+	      })
 	    })
 	});
 
@@ -30,7 +35,7 @@ export class EProfileComponent implements OnInit {
 
   ngOnInit() {
 	  this.firebaseService.getEmployee(this.afAuth.auth.currentUser.uid).subscribe(showEmp => {
-			 	this.empForm.get('details').setValue(showEmp);
+			 	this.empForm.get('details').patchValue(showEmp);
 			 	this.showEmp = showEmp;
 			 });
   }

@@ -1,4 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {FirebaseService} from '../../services/firebase.service';
+
 declare var $:any;
 
 @Component({
@@ -8,12 +11,40 @@ declare var $:any;
 })
 export class EUserComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  isFree: any;	
+
+  constructor(private router: Router, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
+  	this.firebaseService.check_if_free_employee().subscribe(availEmpData =>
+    {
+      if(availEmpData==""){
+        this.isFree=false;
+      }
+      else{
+        this.isFree=true; 
+      }  
+    });
   }
 
   ngAfterViewInit(){
 	$.getScript('../assets/js/material-dashboard.js');
   }
+
+  navSearchJobs(){
+  	if(!this.isFree){
+	  	var notify=confirm("Your Business Owner will be notified. Are you sure to search for jobs?");
+	  	if(notify){
+	  		this.firebaseService.setNotify();
+	    	this.router.navigate(['/e-user/search-jobs']);
+	  	}
+	  	else{
+	  		this.router.navigate(['/e-user/profile']);
+	  	}
+	}
+	else{
+  		this.router.navigate(['/e-user/search-jobs']);
+  	}		  	
+  }
+
 }

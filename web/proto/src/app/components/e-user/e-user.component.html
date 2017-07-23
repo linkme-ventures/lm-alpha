@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li routerLinkActive="active">
-                    <a [routerLink]="['search-jobs']">
+                    <a (click)="navSearchJobs()" [routerLink]="['search-jobs']">
                         <i class="material-icons">work</i>
                         <p>Search Jobs</p>
                     </a>

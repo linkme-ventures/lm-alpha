@@ -49,13 +49,18 @@ export class EmpSignupComponent implements OnInit {
   }
 
   onSubmit(){
-    if((this.empSignForm.get('pwdGrp.password1').value)==(this.empSignForm.get('pwdGrp.password2').value)){
-      this.firebaseService.employeeSignup(this.empSignForm.value);
 
-    }else{
-      alert("The 2 passwords are not matching");
-    };
+    if(!(<HTMLInputElement>document.getElementById('image_employee')).files[0]){
+        alert("Please upload photo");
+    }
+    else{
+      if((this.empSignForm.get('pwdGrp.password1').value)==(this.empSignForm.get('pwdGrp.password2').value)){
+        this.firebaseService.employeeSignup(this.empSignForm.value);
 
+      }else{
+        alert("The 2 passwords are not matching");
+      };
+    }  
   }
 
 }

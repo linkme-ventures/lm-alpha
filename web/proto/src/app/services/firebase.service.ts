@@ -136,6 +136,7 @@ employeeSignup(employee){
   	var fbDb2 = fbApp2.database();
   	 fbAuth2.createUserWithEmailAndPassword(employee.details.email, employee.pwdGrp.password1).then((firebaseUser) => {
     	console.log("User " + firebaseUser.uid + " created successfully!");
+    	employee.details.manId = this.afAuth.auth.currentUser.uid;
      	fbDb2.ref('/Employees/'+firebaseUser.uid).set(employee.details).then((success) => {
      			fbAuth2.signOut();
 				fbApp2.delete();
@@ -541,8 +542,13 @@ app2(id){
 		return this.afDb.object('/Vacancies/'+key+'/protectedInfo/manId'+"/");
 	}
 	assign_free_employee(vac_id,emp_id,name){
-
-			this.afDb.list('/ManagedEmps').update(this.afAuth.auth.currentUser.uid, {[emp_id]:{'name':name}});
+			this.afDb.list('/ManagedEmps').update(this.afAuth.auth.currentUser.uid, {[emp_id]:{'name':name}}).then((success) =>{
+				this.afDb.object('/Employees/'+emp_id+"/").update({'manId':this.afAuth.auth.currentUser.uid});
+			}).catch((error) => {
+				alert("Error adding employee: "+ error.message);
+				console.log(error);
+				return;
+			});
 			this.afDb.object('/AvailableEmps/'+emp_id+"/").remove();
 			this.afDb.object('/Vacancies/'+vac_id+"/result/"+emp_id).remove();
 			this.afDb.object('/Vacancies/'+vac_id+"/applicants/"+emp_id).remove();
@@ -555,6 +561,10 @@ app2(id){
 
 
 
+	}
+
+	setNotify(){
+		this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid).update({'searchedForJobs':{'notified':true}});
 	}
 
 
