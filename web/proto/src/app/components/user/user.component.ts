@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Location, PopStateEvent } from "@angular/common";
+import { AngularFireAuth } from 'angularfire2/auth';
 
 declare var $:any;
 
@@ -13,7 +14,7 @@ export class UserComponent implements OnInit, AfterViewInit {
 
   private lastPoppedUrl: string;	
 
-  constructor(private router: Router, private location: Location) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router, private location: Location) { }
 
   ngOnInit() {
   	this.location.subscribe((ev:PopStateEvent) => {
@@ -28,6 +29,16 @@ export class UserComponent implements OnInit, AfterViewInit {
                 }
             }
         });
+  }
+
+  logout(){
+    var notify=confirm("Are you sure to logout?");
+    if(notify){
+      this.afAuth.auth.signOut().then(() => {
+        console.log('logged out'); 
+        this.router.navigate(['/login']);
+      });
+    }     
   }
 
     ngAfterViewInit(){

@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {FirebaseService} from '../../services/firebase.service';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 
 declare var $:any;
 
@@ -13,7 +15,7 @@ export class EUserComponent implements OnInit, AfterViewInit {
 
   isFree: any;	
 
-  constructor(private router: Router, private firebaseService: FirebaseService) { }
+  constructor(public afAuth: AngularFireAuth, private router: Router, private firebaseService: FirebaseService) { }
 
   ngOnInit() {
   	this.firebaseService.check_if_free_employee().subscribe(availEmpData =>
@@ -45,6 +47,16 @@ export class EUserComponent implements OnInit, AfterViewInit {
 	else{
   		this.router.navigate(['/e-user/search-jobs']);
   	}		  	
+  }
+
+  logout(){
+    var notify=confirm("Are you sure to logout?");
+    if(notify){
+      this.afAuth.auth.signOut().then(() => {
+        console.log('logged out'); 
+        this.router.navigate(['/login']);
+      });
+    }     
   }
 
 }
