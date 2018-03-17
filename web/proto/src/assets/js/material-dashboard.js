@@ -114,8 +114,8 @@ md = {
     initRightMenu: debounce(function(){
         $sidebar_wrapper = $('.sidebar-wrapper');
 
-        if(!mobile_menu_initialized){
-            $navbar = $('nav').find('.navbar-collapse').first().clone(true);
+        if(!mobile_menu_initialized){	
+            /*$navbar = $('nav').find('.navbar-collapse').first().clone(true);
 
             nav_content = '';
             mobile_menu_content = '';
@@ -136,18 +136,18 @@ md = {
             $nav_content = $(nav_content);
             $nav_content.insertBefore($sidebar_nav);
             $navbar_form.insertBefore($nav_content);
-
+			*/
+			$sidebar_wrapper.find('.nav-mobile-menu').show();	
             $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function(event) {
                 event.stopPropagation();
-
             });
 
             mobile_menu_initialized = true;
         } else {
             if($(window).width() > 991){
                 // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px
-                $sidebar_wrapper.find('.navbar-form').remove();
-                $sidebar_wrapper.find('.nav-mobile-menu').remove();
+               // $sidebar_wrapper.find('.navbar-form').remove();
+                $sidebar_wrapper.find('.nav-mobile-menu').hide();
 
                 mobile_menu_initialized = false;
             }
