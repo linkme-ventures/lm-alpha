@@ -19,13 +19,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-           "./assets/css/bootstrap.min.css",
-           "./assets/css/material-dashboard.css"
+           "./assets/css/material-dashboard.css",
+		   "./assets/css/star-rating.css"
       ],
       "scripts": [
            "../node_modules/jquery/dist/jquery.min.js",
            "./assets/js/bootstrap.min.js",
-           "./assets/js/material.min.js" 
+           "./assets/js/material.min.js",
+		   "./assets/js/star-rating.js"	
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

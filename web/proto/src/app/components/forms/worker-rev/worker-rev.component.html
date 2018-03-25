@@ -1,0 +1,78 @@
+<div class="card card-signup">
+      <div class="card-header" data-background-color="purple">
+            <h4 class="title">Review Worker</h4>
+      <p class="category">Rate and provide comments for this worker</p>
+        </div>
+        <div class="card-content">
+      <form [formGroup]="addReviewForm" (ngSubmit)="onSubmit()">
+          
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-6">
+                Overall Skills
+              </div>
+              <div class="col-xs-6">
+                <input formControlName="skills" id="star-rtin-skills" type="text" class="rating rating-loading" value="4" data-size="xs" title="" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-6">
+                Hygiene
+              </div>
+              <div class="col-xs-6">
+                <input formControlName="hygiene" id="star-rtin-hygiene" type="text" class="rating rating-loading" value="4" data-size="xs" title="" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-6">
+                Sociability
+              </div>
+              <div class="col-xs-6">
+                <input formControlName="social" id="star-rtin-social" type="text" class="rating rating-loading" value="4" data-size="xs" title="" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-6">
+                Punctuality
+              </div>
+              <div class="col-xs-6">
+                <input formControlName="punct" id="star-rtin-punct" type="text" class="rating rating-loading" value="4" data-size="xs" title="" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <div class="col-xs-6">
+                Behaviour
+              </div>
+              <div class="col-xs-6">
+                <input formControlName="behav" id="star-rtin-behav" type="text" class="rating rating-loading" value="4" data-size="xs" title="" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group label-floating">
+              <label class="control-label">Comments</label>
+              <input formControlName="comments" type="text" class="form-control" id="comments" required>
+            </div>
+              </div>
+          </div>
+
+          
+
+            
+
+
+          <button type="submit" class="btn btn-primary pull-right">Submit Review </button>
+          <div class="clearfix"></div>
+      </form>
+  </div>
+</div>

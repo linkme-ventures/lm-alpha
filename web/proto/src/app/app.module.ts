@@ -43,6 +43,9 @@ import { EUserComponent } from './components/e-user/e-user.component';
 import { EProfileComponent } from './components/e-user/e-profile/e-profile.component';
 import { SearchJobsComponent } from './components/e-user/search-jobs/search-jobs.component';
 import { AppliedJobsComponent } from './components/e-user/applied-jobs/applied-jobs.component';
+import { ReviewEmpComponent } from './components/review-emp/review-emp.component';
+import { WorkerRevComponent } from './components/forms/worker-rev/worker-rev.component';
+
 
 export const appRoutes: Routes = [
   {path:'', component:LoginComponent},
@@ -66,7 +69,8 @@ export const appRoutes: Routes = [
       { path:'addEmp', component:AddEmployeeComponent},
       {path:'applicant-list/:id', component:ApplicantListComponent},
       {path:'applicant-profile/:id', component:WorkerProfileComponent},
-      { path:'manage-vacancies', component:ManageVacanciesComponent}  
+      { path:'manage-vacancies', component:ManageVacanciesComponent},
+      { path:'review/:id', component:ReviewEmpComponent}  
     ]
   },
   {path:'e-user', component:EUserComponent, canActivate: [AuthGuard],
@@ -109,7 +113,9 @@ export const appRoutes: Routes = [
     EUserComponent,
     EProfileComponent,
     SearchJobsComponent,
-    AppliedJobsComponent
+    AppliedJobsComponent,
+    ReviewEmpComponent,
+    WorkerRevComponent
   ],
   imports: [
     BrowserModule,
