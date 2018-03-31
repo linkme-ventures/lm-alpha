@@ -12,7 +12,7 @@ export class AddEmployeeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  	$.getScript('../assets/js/material-dashboard.js');
+  	$.getScript('../assets/js/md-form-ctrl.js');
   }
 
 }

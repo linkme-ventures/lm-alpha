@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FirebaseService } from '../../../services/firebase.service';
 
@@ -22,8 +22,7 @@ export class WorkerRevComponent implements OnInit {
     comments: new FormControl()
   });
 
-  ngOnInit() {
-     $.getScript('../assets/js/material-dashboard.js');
+  ngOnInit() {     
   }
 
 

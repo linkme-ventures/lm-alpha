@@ -12,9 +12,11 @@ export class ReviewEmpComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   ngAfterViewInit(){
         $.getScript('../assets/js/star-rating-init.js');
+        $.getScript('../assets/js/md-form-ctrl.js');
      }
 }
