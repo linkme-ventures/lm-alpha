@@ -18,7 +18,6 @@ import { OwnerComponent } from './components/owner/owner.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { EmpHomeComponent } from './components/emp-home/emp-home.component';
-import { AuthService } from './components/core/auth.service';
 import { AuthGuard} from './components/core/auth.guard';
 import { SignupComponent } from './components/signup/signup.component';
 import { OwnerProfileComponent } from './components/owner-profile/owner-profile.component';
@@ -127,7 +126,7 @@ export const appRoutes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [FirebaseService, AuthService, AuthGuard, DataService],
+  providers: [FirebaseService, AuthGuard, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

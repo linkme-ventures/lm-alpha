@@ -567,6 +567,14 @@ app2(id){
 		this.afDb.object('/Employees/'+this.afAuth.auth.currentUser.uid).update({'searchedForJobs':{'notified':true}});
 	}
 
+  searchForEmps(location){
+
+  
+  }
+
+
+
+
 
 }
 
