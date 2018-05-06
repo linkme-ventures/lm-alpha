@@ -12,13 +12,27 @@
    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+    .loading-center {
+        display : block;
+        position : fixed;
+        z-index: 100;
+        background-image : url('./assets/img/spinner.gif');
+        background-repeat : no-repeat;
+        background-position : center;
+        left : 0;
+        bottom : 0;
+        right : 0;
+        top : 0;
+    }
+   </style>
 
   <!-- link rel="stylesheet" type="text/css" href="https://bootswatch.com/sandstone/bootstrap.min.css" -->
 
 </head>
 <body>
 
-  <app-root>Loading...</app-root>
+  <app-root><div class="loading-center"></div></app-root>
 
 </body>
 

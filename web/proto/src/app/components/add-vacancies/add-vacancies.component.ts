@@ -13,8 +13,8 @@ export class AddVacanciesComponent implements OnInit {
     job_role: new FormControl(),
     job_salary: new FormControl(),
     job_gender: new FormControl(),
-    job_address: new FormControl(),
-    job_category: new FormControl()
+    job_address: new FormControl()
+    //job_category: new FormControl()
   });
 
   constructor(private firebaseService: FirebaseService, private router: Router) { }
