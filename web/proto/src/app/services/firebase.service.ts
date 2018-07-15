@@ -15,6 +15,7 @@ export class FirebaseService {
 	job: FirebaseObjectObservable<any[]>;
 	displEmp: FirebaseObjectObservable<any>;
 	displOwn: FirebaseObjectObservable<any>;
+	cc:FirebaseObjectObservable<any>;
 	folder:any;
 	image1:any;
 	addit:number;
@@ -23,6 +24,7 @@ export class FirebaseService {
 	job_array:any[];
 	checkjobadd:any[];
 	job_apply:jobApply;
+	addReviewForm:addReviewForm;
 	listings: FirebaseListObservable<any[]>;
 
 
@@ -86,6 +88,7 @@ export class FirebaseService {
 										owner.details.organisation_image_path = path;
 										this.owners.set(owner.details).then((success) => {
 												alert("Profile was created successfully");
+												return this.owners;
 										});
 								});
 							}
@@ -94,9 +97,12 @@ export class FirebaseService {
 				}).catch((error) => {
 						alert(error.message);
 						console.log(error);
+						return -1;
 					});
   }
 employeeSignup(employee){
+	var cc:any;
+	cc=0;
 	this.folder="EmployeeImages";
 	this.afAuth.auth.createUserWithEmailAndPassword(employee.details.email, employee.pwdGrp.password1).then((success) => {
 	console.log(success);
@@ -112,21 +118,27 @@ employeeSignup(employee){
 			this.empsignup.set(employee.details).then((success) => {
 				this.afDb.object('/AvailableEmps/'+this.afAuth.auth.currentUser.uid+'/name/').set(employee.details.name).then((success) =>{
 					alert("Profile was created successfully");
+					cc=1;
+
 				}).catch((error) => {
 					alert(error.message);
 					console.log(error);
+					cc= -1;
 					});
 
 			}).catch((error) => {
 					alert(error.message);
 					console.log(error);
+					cc= -1;
 				});
 		});
 	}
 	}).catch((error) => {
 			alert(error.message);
 			console.log(error);
+			cc=-1;
 		});
+		return cc;
 }
 
   addEmployee(employee){
@@ -569,8 +581,28 @@ app2(id){
 
   searchForEmps(location){
 
-  
+
   }
+	addReviewService(addReviewForm){
+
+	//	var newReqId = firebase.database().ref().child('Reviews').push().key;
+	let updateMap = {};
+	var postData = {"skills":addReviewForm.value.skills,"hygiene":addReviewForm.value.hygiene,"social":addReviewForm.value.social,"punct":addReviewForm.value.punct,"behav":addReviewForm.value.behav,"comments":addReviewForm.value.comments};
+	var newReqId = firebase.database().ref().child('StaffingReq').push().key;
+
+	updateMap["/Reviews/"+ newReqId] = postData;
+
+		firebase.database().ref().update(updateMap).then((success) =>{
+			console.log(addReviewForm.value.skills);
+		});
+		return newReqId;
+	}
+	addReviewIdToEmployee(employeeId,reviewID){
+		this.afDb.object('/Employees/'+employeeId+'/reviews/'+reviewID).set("reviewID");
+		return 1;
+		//firebase.database().ref().child('Employees').push().key;
+
+	}
 
 
 
@@ -650,6 +682,14 @@ interface Employee{
 interface ManagedEmp{
   	$key?:string;
   	name?:string;
+}
+interface addReviewForm{
+	skills?: any;
+	hygiene?: any;
+	social?: any;
+	punct?: any;
+	behav?: any;
+	comments?: any;
 }
 interface jobApply{
 	reqInfo: {

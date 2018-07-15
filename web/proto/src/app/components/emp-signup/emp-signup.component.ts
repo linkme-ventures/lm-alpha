@@ -30,7 +30,7 @@ export class EmpSignupComponent implements OnInit {
       uid: new FormControl(),
       sal: new FormControl(),
       profession_type: new FormControl()
-    }), 
+    }),
     pwdGrp: new FormGroup ({
         password1: new FormControl(),
         password2: new FormControl(),
@@ -55,12 +55,19 @@ export class EmpSignupComponent implements OnInit {
     }
     else{
       if((this.empSignForm.get('pwdGrp.password1').value)==(this.empSignForm.get('pwdGrp.password2').value)){
-        this.firebaseService.employeeSignup(this.empSignForm.value);
+        alert(this.firebaseService.employeeSignup(this.empSignForm.value));
+        {
+          var that=this;
+
+            //this.router.navigate(['/login']);
+            setTimeout(function() { that.router.navigate(['/login']); }, 5000);
+
+        };
 
       }else{
         alert("The 2 passwords are not matching");
       };
-    }  
+    }
   }
 
 }

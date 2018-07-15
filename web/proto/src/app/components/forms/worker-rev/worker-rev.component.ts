@@ -1,7 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { FirebaseService } from '../../../services/firebase.service';
-
+import {Router, ActivatedRoute, Params} from '@angular/router';
+import * as firebase from 'firebase';
 declare var $:any;
 
 @Component({
@@ -11,7 +12,12 @@ declare var $:any;
 })
 export class WorkerRevComponent implements OnInit {
 
-  constructor(private firebaseService: FirebaseService) { }
+id:any;
+  constructor(
+    private firebaseService: FirebaseService,
+    private router:Router,
+    private route:ActivatedRoute
+  ) { }
 
   addReviewForm = new FormGroup ({
     skills: new FormControl(),
@@ -22,7 +28,9 @@ export class WorkerRevComponent implements OnInit {
     comments: new FormControl()
   });
 
-  ngOnInit() {     
+  ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    alert(this.id);
   }
 
 
@@ -37,6 +45,13 @@ export class WorkerRevComponent implements OnInit {
     });
     console.log(this.addReviewForm.value);
      //firebase service call here
+     var reviewID=this.firebaseService.addReviewService(this.addReviewForm);
+     //alert(reviewID);
+    var reviewflag= this.firebaseService.addReviewIdToEmployee(this.id,reviewID);
+    if(reviewflag==1){
+      alert("Your Review is added successfully");
+    }
+
   }
 
 }
